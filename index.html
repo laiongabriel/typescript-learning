@@ -7,15 +7,13 @@
    <title>Document</title>
 
    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
-
       body {
-         font-family: "Outfit";
+         font-family: sans-serif;
          margin: 2rem;
+         font-size: 1.25rem;
       }
 
       table {
-         font-size: 1.25rem;
          border-spacing: 0;
          text-align: left;
       }
@@ -41,6 +39,11 @@
 </head>
 
 <body>
+   <h2>Estatísticas</h2>
+   <p id="total">Total: <span></span></p>
+   <div id="pagamento"></div>
+   <div id="status"></div>
+   <p id="dia">Dia com mais vendas: <span></span></p>
    <h2>Dados</h2>
    <table id="transacoes">
       <thead>

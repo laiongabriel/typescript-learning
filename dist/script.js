@@ -1,3 +1,4 @@
+import Estatisticas from "./Estatisticas.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
 async function handleData() {
@@ -6,6 +7,7 @@ async function handleData() {
         return;
     const transacoes = data.map(normalizarTransacao);
     preencherTabela(transacoes);
+    preencherEstatistica(transacoes);
 }
 function preencherTabela(transacoes) {
     const tabela = document.querySelector("#transacoes tbody");
@@ -22,6 +24,32 @@ function preencherTabela(transacoes) {
       </tr>
       `;
     });
+}
+function preencherLista(lista, containerId) {
+    const containerElement = document.getElementById(containerId);
+    if (containerElement) {
+        Object.keys(lista).forEach((key) => {
+            containerElement.innerHTML += `
+         <p>${key}: ${lista[key]}</p>
+         `;
+        });
+    }
+}
+function preencherEstatistica(transacoes) {
+    const data = new Estatisticas(transacoes);
+    preencherLista(data.pagamento, "pagamento");
+    preencherLista(data.status, "status");
+    const totalElement = document.querySelector("#total span");
+    if (totalElement) {
+        totalElement.innerText = data.total.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });
+    }
+    const diaElement = document.querySelector("#dia span");
+    if (diaElement) {
+        diaElement.innerText = data.melhorDia[0];
+    }
 }
 handleData();
 //# sourceMappingURL=script.js.map
